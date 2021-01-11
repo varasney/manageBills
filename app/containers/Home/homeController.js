@@ -19,7 +19,6 @@ export default function homeController(props) {
     }
 
     const handleSubmitData = (data) => {
-        alert('hi')
         console.log('suhas nano obj', data);
         let obj = buildBillObj(data, billList.length + 1)
         let cpybillList = [...billList];
