@@ -11,6 +11,7 @@ import Modal from './Modal';
 import Chart from './Chart';
 import ConfirmPayment from './ConfirmPayment';
 import EditBills from './EditBills';
+import ButtonComponent from './UnitComponents';
 
 
 export {
@@ -26,5 +27,6 @@ export {
     Modal,
     Chart,
     ConfirmPayment,
-    EditBills
+    EditBills,
+    ButtonComponent
 }
