@@ -4,7 +4,7 @@ import {
     Text,
     StyleSheet, TouchableOpacity
 } from 'react-native';
-
+import THEMER from '../../utils/themer';
 export default function BottomButton({ onPress, style, label, labelSize }) {
     return (
         <TouchableOpacity style={[styles.bottomView, style]} onPress={onPress}>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     bottomView: {
         width: '100%',
         height: 50,
-        backgroundColor: '#36A3BB',
+        backgroundColor: THEMER.BOTTOMBAR_BG,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',

@@ -10,11 +10,12 @@ import {
 } from 'react-native';
 import Card from '../Card';
 import Divider from '../Divider';
+import THEMER from '../../utils/themer';
 
 export default function HomeCard({ data, onRemove, onEdit, onCardPress }) {
     const { description, category, amount, date, paid, isSelected } = data;
     let paidStatus = paid ? "PAID" : "UNPAID";
-    let bgColor = isSelected && !paid ? '#DCE1E3' : '#FFFFFF';
+    let bgColor = isSelected && !paid ? THEMER.CARD_SELECTED_BG : THEMER.CARD_UNSELECTED_BG;
     return (
         <Card
             style={{ backgroundColor: bgColor }}
@@ -22,11 +23,11 @@ export default function HomeCard({ data, onRemove, onEdit, onCardPress }) {
             disabled={paid}>
             <View style={styles.labelContainer}>
                 <View style={styles.labelContainerChild}>
-                    <Text style={styles.mainLabel}>{description || "Car Wash"}</Text>
+                    <Text style={styles.mainLabel}>{description}</Text>
                 </View>
             </View>
             <View style={styles.dateContainer}>
-                <Text style={styles.date}>Date : <Text >{date || '20-JUNE-2020'}</Text></Text>
+                <Text style={styles.date}>Date : <Text >{date}</Text></Text>
                 <Badge label={`Rs. ${amount || ''}`} />
             </View>
             <Divider />
@@ -35,7 +36,7 @@ export default function HomeCard({ data, onRemove, onEdit, onCardPress }) {
                 <TouchableOpacity onPress={() => onEdit(data)}><Text >Edit</Text></TouchableOpacity>
                 <Badge label={category} />
                 <View>
-                    <Text style={{ color: paid ? 'green' : 'pink' }}>{paidStatus}</Text>
+                    <Text style={{ color: paid ? THEMER.PAID_STATUS : THEMER.UNPAID_STATUS }}>{paidStatus}</Text>
                 </View>
             </View>
         </Card>
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
         marginLeft: 50
     },
     badge: {
-        backgroundColor: '#efefef',
+        backgroundColor: THEMER.BADGE_BG_COLOR,
         borderRadius: 25,
         minWidth: 80,
         justifyContent: 'center',

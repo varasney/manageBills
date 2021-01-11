@@ -18,8 +18,8 @@ import {
     ContributionGraph,
     StackedBarChart
 } from "react-native-chart-kit";
-import moment from 'moment';
-import { DATE_FROMAT } from '../../utils/constants';
+
+import THEMER from '../../utils/themer';
 
 export default function Chart({ data, onRemove, onEdit }) {
     const extractMonthData = (data) => {
@@ -30,7 +30,7 @@ export default function Chart({ data, onRemove, onEdit }) {
         }
         data.map((item, i) => {
             if (item.paid) {
-                isValue =parseInt(item.date.split('-')[1])
+                isValue = parseInt(item.date.split('-')[1])
                 obj[isValue] = obj[isValue] ? parseInt(item.amount) + parseInt(obj[isValue]) : parseInt(item.amount);
             }
         })
@@ -57,9 +57,9 @@ export default function Chart({ data, onRemove, onEdit }) {
                     yAxisSuffix=""
                     yAxisInterval={1} // optional, defaults to 1
                     chartConfig={{
-                        backgroundColor: "#e26a00",
-                        backgroundGradientFrom: "#fb8c00",
-                        backgroundGradientTo: "#ffa726",
+                        backgroundColor: THEMER.CHART_BG_COLOR,
+                        backgroundGradientFrom: THEMER.CHART_BG_GRADIENT_FROM,
+                        backgroundGradientTo: THEMER.CHART_BG_GRADIENT_TO,
                         decimalPlaces: 0, // optional, defaults to 2dp
                         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                         labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

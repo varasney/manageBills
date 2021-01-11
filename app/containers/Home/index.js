@@ -26,6 +26,7 @@ import homeController from './homeController';
 import { getCategoriesFromData } from '../../utils';
 import { MIN_BUDGET } from '../../utils/constants';
 import { strings } from '../../utils/strings';
+import { styles } from './style';
 
 function Home(props) {
 
@@ -100,9 +101,9 @@ function Home(props) {
                     <InputBox
                         keyboardType="numeric"
                         value={selectedTotalBudget && selectedTotalBudget.toString()}
-                        placeholder={"Enter Your Monthly Budget"}
+                        placeholder={strings('yourMonthlyBudget')}
                         onChangeText={(value) => handleTotalBudget(parseInt(value))} />
-                    <ButtonComponent onPress={setFinalBudget} label="SET BUDGET" style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }} />
+                    <ButtonComponent onPress={setFinalBudget} label="SET BUDGET" style={styles.budgetButton} />
                 </View>
             </View>
 
@@ -142,8 +143,6 @@ function Home(props) {
                         totalAmount={totalSelectedAmount} />}
 
                 <BottomBar onPress={handlePressAddBill} label="ADD BILL" />
-
-
             </View>
         </>
     )
@@ -165,19 +164,13 @@ const PayButton = ({ onPress, totalAmount }) => (
     <View style={{ flexDirection: 'row-reverse' }}>
         <BottomBar
             onPress={onPress}
-            style={{ bottom: 60, width: '30%', borderRadius: 35, backgroundColor: '#72D7CB' }}
+            style={styles.payNowFloating}
             label={`Pay Rs. ${totalAmount}`}
             labelSize={14}
         />
     </View>
 )
 
-
-const styles = StyleSheet.create({
-    container: {
-        height: '100%'
-    },
-})
 const mapStateToProps = state => {
     return {
         billList: state.billList,

@@ -8,9 +8,10 @@ import {
     Text,
     TouchableOpacity
 } from 'react-native';
+import THEMER from '../../utils/themer';
 
 export default function Header({ label, onLeftClick, onRightPress }) {
-    let isLeftSide = true ? '<' : '';
+    let isLeftSide = true ? '' : '';
     let isRightSide = true ? '...' : '';
     return (
         <View style={styles.container}>
@@ -25,8 +26,8 @@ export default function Header({ label, onLeftClick, onRightPress }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'lightblue',
-        height: 50,
+        backgroundColor: THEMER.HEADER_BG_COLOR,
+        height: THEMER.HEADER_HEIGHT,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
