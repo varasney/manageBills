@@ -1,16 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
-import { TOTAL_BUDGET } from '../../utils/constants';
+
 import { buildBillObj } from '../../utils';
+import { strings } from '../../utils/strings';
 
 export default function homeController(props) {
-    const { billList, updateBillList } = props;
+    const { billList, updateBillList, TOTAL_BUDGET } = props;
     const [isAddBillVisible, setModalVisiblity] = useState(false);
     const [isConfirmModal, setConfirmModal] = useState(false);
     const [isOptionModal, setIsOptionModal] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedBillToEdit, setSelectedBillToEdit] = useState({});
+    const [selectedTotalBudget, setSelectedTotalBudget] = useState(TOTAL_BUDGET);
 
     const removeBills = () => {
         let cpybillList = [...billList];
@@ -22,7 +24,6 @@ export default function homeController(props) {
         console.log('suhas nano obj', data);
         let obj = buildBillObj(data, billList.length + 1)
         let cpybillList = [...billList];
-        
         cpybillList.push(obj);
         updateBillList(cpybillList);
         hideModal();
@@ -75,8 +76,8 @@ export default function homeController(props) {
 
     const showAlert = () =>
         Alert.alert(
-            "Total Budget Alert",
-            `Your total Monthly Budget should not be more then ${TOTAL_BUDGET}`,
+            strings('budgetAlert'),
+            `${strings('moreThan')} ${TOTAL_BUDGET}`,
             [
                 { text: "OK", onPress: () => console.log("OK Pressed") }
             ],
@@ -117,6 +118,7 @@ export default function homeController(props) {
         isOptionModal,
         selectedCategory,
         selectedBillToEdit,
+        selectedTotalBudget,
         removeBills,
         handleSubmitData,
         hideModal,
@@ -132,6 +134,7 @@ export default function homeController(props) {
         setSelectedCategory,
         handleSelectedBillToEdit,
         handlePressAddBill,
-        getBillsOnCategory
+        getBillsOnCategory,
+        setSelectedTotalBudget
     })
 }

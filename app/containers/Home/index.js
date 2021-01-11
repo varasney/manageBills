@@ -5,10 +5,10 @@ import {
     Text,
     StyleSheet,
     FlatList,
-    ScrollView
+    ScrollView, TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
-import { updateBills } from '../../redux/actions';
+import { updateBills, updateTotalBudget } from '../../redux/actions';
 
 import {
     Header,
@@ -18,10 +18,14 @@ import {
     Modal,
     Chart,
     ConfirmPayment,
-    Dropdown
+    Dropdown,
+    InputBox,
+    ButtonComponent
 } from '../../components';
 import homeController from './homeController';
 import { getCategoriesFromData } from '../../utils';
+import { MIN_BUDGET } from '../../utils/constants';
+import { strings } from '../../utils/strings';
 
 function Home(props) {
 
@@ -31,6 +35,7 @@ function Home(props) {
         isOptionModal,
         selectedCategory,
         selectedBillToEdit,
+        selectedTotalBudget,
         removeBills,
         handleSubmitData,
         hideModal,
@@ -46,7 +51,8 @@ function Home(props) {
         setSelectedCategory,
         handleSelectedBillToEdit,
         handlePressAddBill,
-        getBillsOnCategory
+        getBillsOnCategory,
+        setSelectedTotalBudget
 
     } = homeController(props);
 
@@ -57,6 +63,19 @@ function Home(props) {
         setIsOptionModal(!isOptionModal);
     }
 
+    const handleTotalBudget = (value) => {
+        setSelectedTotalBudget(value);
+    }
+
+    const setFinalBudget = () => {
+        if (selectedTotalBudget > MIN_BUDGET) {
+            updateTotalBudget(selectedTotalBudget);
+            setIsOptionModal(false)
+        } else {
+            alert(`${strings('minBudget')} ${MIN_BUDGET}`)
+        }
+
+    }
     const isShowPay = checkIsPayVisibility(billList);
     let totalSelectedAmount = getTotalSelectedAmount();
     let selectedUNPAIDBills = getSelectedUnpaidBills();
@@ -75,6 +94,16 @@ function Home(props) {
                     data={getCategoriesFromData(props.billList)}
                     selectedData={selectedCategory}
                     onChange={(category) => handleCategory(category)} />
+
+                <View style={{ marginTop: 50 }}>
+                    <Text style={{ marginLeft: 10 }}>Set your budget</Text>
+                    <InputBox
+                        keyboardType="numeric"
+                        value={selectedTotalBudget && selectedTotalBudget.toString()}
+                        placeholder={"Enter Your Monthly Budget"}
+                        onChangeText={(value) => handleTotalBudget(parseInt(value))} />
+                    <ButtonComponent onPress={setFinalBudget} label="SET BUDGET" style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }} />
+                </View>
             </View>
 
         </Modal>
@@ -150,13 +179,17 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = state => {
     return {
-        billList: state.billList
+        billList: state.billList,
+        TOTAL_BUDGET: state.TOTAL_BUDGET
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     updateBillList: (updatedData) => {
         dispatch(updateBills(updatedData));
+    },
+    updateTotalBudget: (updatedBudget) => {
+        dispatch(updateTotalBudget(updatedBudget));
     },
 })
 
