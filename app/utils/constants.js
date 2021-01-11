@@ -4,6 +4,7 @@ export const TOTAL_BUDGET = 50000;
 export const MIN_BUDGET = 20000;
 
 export const CATEGORY_DATA = [
+    { label: "Others", value: "Others" },
     { label: "utility", value: "utility" },
     { label: "FoodNDining", value: "FoodNDining" },
     { label: "shopping", value: "shopping" },
