@@ -27,12 +27,19 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
 
     const handleSubmit = () => {
         if (billDescription && amount && selectedDate && selectedCategory) {
-            onPress && onPress({
+
+            let dataToSubmit = {
                 billDescription,
-                amount,
+                amount: parseInt(amount),
                 selectedDate,
-                selectedCategory
-            });
+                selectedCategory,
+
+            }
+            if (Object.keys(isEditData).length > 0 && Object.values(isEditData).length) {
+                dataToSubmit.id = isEditData.id
+            }
+
+            onPress && onPress(dataToSubmit);
         }
 
         clearDataAfterSubmit()

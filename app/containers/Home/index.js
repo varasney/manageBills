@@ -140,6 +140,7 @@ function Home(props) {
                     <PayButton
                         onPress={showConfirmModal}
                         totalAmount={totalSelectedAmount} />}
+
                 <BottomBar onPress={handlePressAddBill} label="ADD BILL" />
 
 

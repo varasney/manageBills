@@ -24,7 +24,18 @@ export default function homeController(props) {
         console.log('suhas nano obj', data);
         let obj = buildBillObj(data, billList.length + 1)
         let cpybillList = [...billList];
-        cpybillList.push(obj);
+        if (selectedBillToEdit && Object.keys(selectedBillToEdit).length > 0) {
+            // update edited data
+            billList.forEach((item, index) => {
+                if (item.id == selectedBillToEdit.id) {
+                    cpybillList[index] = { ...buildBillObj(data, selectedBillToEdit.id) }
+                }
+            })
+
+        } else {
+            //for new data
+            cpybillList.push(obj);
+        }
         updateBillList(cpybillList);
         hideModal();
     }
@@ -98,7 +109,6 @@ export default function homeController(props) {
 
     const handleSelectedBillToEdit = (item) => {
         setSelectedBillToEdit(item);
-
         showModal();
     }
 
