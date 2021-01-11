@@ -10,7 +10,7 @@ export default function DatepickerComponent({ onChange, selectedDate, style, lab
     return (
         <View>
             <DatePicker
-                style={{ width: 200 }}
+                style={{ width: '100%' }}
                 date={selectedDate || ''}
                 mode="date"
                 placeholder="select date"
