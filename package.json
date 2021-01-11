@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "generate": "npx react-native run-android --variant=release"
   },
   "dependencies": {
     "moment": "^2.29.1",
