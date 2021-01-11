@@ -1,33 +1,8 @@
-import { FETCH_BILLS, UPDATE_BILLS } from './actionTypes';
+import { TOTAL_BUDGET as TBUDGET, DEFAULT_BILL_LIST } from '../utils/constants';
+import { FETCH_BILLS, UPDATE_BILLS, TOTAL_BUDGET, UPDATE_TOTAL_BUDGET } from './actionTypes';
 const INITIAL_STATE = {
-    billList: [
-        {
-            "id": 1,
-            "description": "Dominoes",
-            "category": "FoodNDining",
-            "amount": 430,
-            "date": "01-02-2020",
-            "paid": false,
-            "isSelected": false
-        },
-        {
-            "id": 2,
-            "description": "Car wash",
-            "category": "utility",
-            "amount": 500,
-            "date": "01-06-2020",
-            "paid": true,
-            "isSelected": false
-        },
-        {
-            "id": 3,
-            "description": "Amazon",
-            "category": "shopping",
-            "amount": 2030,
-            "date": "01-07-2020",
-            "paid": false,
-            "isSelected": true
-        }]
+    billList: DEFAULT_BILL_LIST,
+    TOTAL_BUDGET: TBUDGET
 }
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
@@ -35,6 +10,10 @@ export default function (state = INITIAL_STATE, action) {
             return { ...state, billList: action.payload };
         case UPDATE_BILLS:
             return { ...state, billList: action.payload };
+        case TOTAL_BUDGET:
+            return { ...state };
+        case UPDATE_TOTAL_BUDGET:
+            return { ...state, TOTAL_BUDGET: action.payload };
         default:
             return state;
     }

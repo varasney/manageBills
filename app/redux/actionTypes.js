@@ -1,2 +1,4 @@
 export const FETCH_BILLS = "FETCH_BILLS";
 export const UPDATE_BILLS = "UPDATE_BILLS";
+export const TOTAL_BUDGET = "TOTAL_BUDGET";
+export const UPDATE_TOTAL_BUDGET = "UPDATE_TOTAL_BUDGET";
