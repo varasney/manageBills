@@ -14,7 +14,7 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
     const [billDescription, setBillDescription] = useState('')
     const [amount, setAmount] = useState(null)
     const [selectedDate, setDate] = useState('')
-    const [selectedCategory, setselectedCategory] = useState('')
+    const [selectedCategory, setselectedCategory] = useState('Others')
 
     useEffect(() => {
         if (Object.keys(isEditData).length > 0 && Object.values(isEditData).length) {
@@ -27,13 +27,11 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
 
     const handleSubmit = () => {
         if (billDescription && amount && selectedDate && selectedCategory) {
-
             let dataToSubmit = {
                 billDescription,
                 amount: parseInt(amount),
                 selectedDate,
-                selectedCategory,
-
+                selectedCategory: selectedCategory || "Others",
             }
             if (Object.keys(isEditData).length > 0 && Object.values(isEditData).length) {
                 dataToSubmit.id = isEditData.id
@@ -57,6 +55,13 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
             setAmount(value);
         }
     }
+    const isValid = () => {
+        let isValid = true;
+        isValid = (billDescription && amount && selectedDate && selectedCategory) ? true : false
+        return isValid
+    }
+
+    let isInvalid = isValid() ? false : "Please enter all the values"
     return (
         <ScrollView >
             <View style={{ padding: 30, margin: 20, marginTop: 0, marginBottom: 40 }}>
@@ -65,7 +70,7 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
                 <View style={{ marginTop: 20 }}>
                     <Dropdown
                         data={CATEGORY_DATA}
-                        selectedData={selectedCategory}
+                        selectedData={selectedCategory || ''}
                         onChange={(category) => setselectedCategory(category)} />
                 </View>
 
@@ -79,6 +84,7 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
                     style={styles.submitContainer}>
                     <Text style={{ textAlign: 'center' }}>Submit</Text>
                 </TouchableOpacity>
+                {isInvalid && <Text style={styles.errorStyle}>{isInvalid}</Text>}
             </View>
         </ScrollView>
     )
@@ -91,12 +97,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#efefef',
         height: 45,
         borderRadius: 10,
-        width: '70%',
+        width: '100%',
         justifyContent: 'center',
         alignContent: 'center',
         // alignSelf: 'center',
         marginTop: 60,
         marginLeft: 10
-    }
+    },
+    errorStyle: { color: 'red', marginTop: 20, marginLeft: 20 }
 
 });
