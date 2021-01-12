@@ -14,5 +14,7 @@ export default THEMER = {
     BADGE_BG_COLOR:"#efefef",
     PAID_STATUS:"green",
     UNPAID_STATUS:"pink",
-    BOTTOMBAR_BG:"#36A3BB"
+    BOTTOMBAR_BG:"#36A3BB",
+    SUBMIT_BG:HEADER_BG_COLOR,
+    SUBMIT_BG_DISABLED:"#efefef"
 }
