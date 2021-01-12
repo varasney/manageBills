@@ -31,10 +31,12 @@ export default function homeController(props) {
                     cpybillList[index] = { ...buildBillObj(data, selectedBillToEdit.id) }
                 }
             })
+            alert(strings('updatedSuccessfully'))
 
         } else {
             //for new data
             cpybillList.push(obj);
+            alert(strings('addedSuccessfully'))
         }
         updateBillList(cpybillList);
         hideModal();

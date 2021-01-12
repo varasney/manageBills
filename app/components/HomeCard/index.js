@@ -33,7 +33,7 @@ export default function HomeCard({ data, onRemove, onEdit, onCardPress }) {
             <Divider />
             <View style={styles.actionButtonContainer}>
                 <TouchableOpacity onPress={() => onRemove()} ><Text >Remove</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => onEdit(data)}><Text >Edit</Text></TouchableOpacity>
+                <TouchableOpacity disabled={paid} onPress={() =>onEdit(data)}><Text >Edit</Text></TouchableOpacity>
                 <Badge label={category} />
                 <View>
                     <Text style={{ color: paid ? THEMER.PAID_STATUS : THEMER.UNPAID_STATUS }}>{paidStatus}</Text>

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { InputBox, Datepicker, Dropdown } from '../index';
 import { TOTAL_BUDGET, CATEGORY_DATA } from '../../utils/constants';
+import THEMER from '../../utils/themer';
 
 
 export default function AddBillInfo({ onPress, isEditData, style, label }) {
@@ -80,8 +81,9 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
                         onChange={(date) => setDate(date)} />
                 </View>
                 <TouchableOpacity
+                    disabled={isInvalid}
                     onPress={() => handleSubmit()}
-                    style={styles.submitContainer}>
+                    style={[styles.submitContainer, { backgroundColor: isInvalid ? THEMER.SUBMIT_BG_DISABLED : THEMER.SUBMIT_BG }]}>
                     <Text style={{ textAlign: 'center' }}>Submit</Text>
                 </TouchableOpacity>
                 {isInvalid && <Text style={styles.errorStyle}>{isInvalid}</Text>}
@@ -94,7 +96,7 @@ export default function AddBillInfo({ onPress, isEditData, style, label }) {
 
 const styles = StyleSheet.create({
     submitContainer: {
-        backgroundColor: '#efefef',
+        backgroundColor: THEMER.SUBMIT_BG,
         height: 45,
         borderRadius: 10,
         width: '100%',
